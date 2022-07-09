@@ -1,0 +1,27 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "Banco de dados MongoDB do projeto nodemoon",
+  "main": "app.js",
+  "scripts": {
+    "dev": "node ./src/app.js",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/github.com/marcusvpires.git"
+  },
+  "author": "Marcus Vinicius <marcusvpires>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/github.com/marcusvpires/issues"
+  },
+  "homepage": "https://github.com/github.com/marcusvpires#readme",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  },
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.4.4"
+  }
+}
