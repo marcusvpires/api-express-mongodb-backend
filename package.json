@@ -4,8 +4,8 @@
   "description": "Banco de dados MongoDB do projeto nodemoon",
   "main": "app.js",
   "scripts": {
-    "dev": "node ./src/app.js",
-    "start": "node server.js"
+    "dev": "nodemon src/server.js",
+    "test": "nodemon src/app.js"
   },
   "repository": {
     "type": "git",
@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "express": "^4.18.1",
-    "mongoose": "^6.4.4"
+    "mongoose": "^6.4.4",
+    "sucrase": "^3.23.0"
   }
 }
