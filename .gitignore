@@ -1,3 +1,7 @@
+# Uploads - Imagens carregadas serão salvas aqui
+
+uploads/*
+
 # Logs
 logs
 *.log
