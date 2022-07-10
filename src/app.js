@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import routes from './routes';
-
+import middlewares from './middlewares'
 class App{
 
   constructor(){
@@ -12,12 +12,8 @@ class App{
       useUnifiedTopology: true,
     });
 
-    this.middlewares();
+    middlewares(this.server);
     this.routes();
-  }
-
-  middlewares(){
-    this.server.use(express.json());
   }
 
   routes(){
