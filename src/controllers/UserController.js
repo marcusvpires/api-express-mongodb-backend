@@ -1,15 +1,6 @@
-//metodos: index, show, update, store, destroy
-/*
-  index: listagem de sessoes
-  store: Criar uma sessao
-  show: Quando queremos listar uma UNICA sessao
-  update: quando queremos alterar alguma sessao
-  destroy: quando queremos deletar uma sessao
-*/
-
 import User from '../models/User';
 
-class SessionController {
+class UserController {
   async store(req, res) {
     const { email } = req.body;
     const { filename } = req.file;
@@ -27,12 +18,12 @@ class SessionController {
   }
 
   async show(req, res) {
-    const { email, password } = req.body;
-    let user = await User.findOne({ email });
-    if (user.email === email && user.password === password) {
+    const { id } = req.headers;
+    let user = await User.findById({ _id: id });
+    if (user) {
       return res.json({ ok: true, user });
     } else {
-      return res.json({ ok: false, message: 'Usuário ou senha incorretos' });
+      return res.json({ ok: false, message: 'Usuário não encontrado' });
     }
   }
 
@@ -58,4 +49,4 @@ class SessionController {
   }
 }
 
-export default new SessionController();
+export default new UserController();
