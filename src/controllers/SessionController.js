@@ -23,6 +23,16 @@ class SessionController{
     }
   }
 
+  async show(req, res){
+    const { email } = req.body;
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.json({ ok: true, user});
+    } else {
+      return res.json({ ok: false, message: "Usuário ou senha incorretos" })
+    }
+  }
+
 }
 
 export default new SessionController();
