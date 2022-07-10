@@ -33,14 +33,23 @@ class SessionController {
 
   async update(req, res) {
     const { id } = req.params;
-    const user = req.body
+    const user = req.body;
     const response = await User.updateOne({ _id: id }, user);
     return res.json({ ok: true, response, user, message: 'Usuário atualizado com sucesso' });
   }
 
-  async index(req, res) { 
+  async index(req, res) {
     const response = await User.find({});
     return res.json({ ok: true, response });
+  }
+
+  async destroy(req, res) {
+    const { id } = req.body;
+    if (!id) { 
+      return res.json({ ok: false, message: "O ID é indefinido" });
+    }
+    const response = await User.findByIdAndDelete({ _id: id });
+    return res.json({ ok: true, response, message: "Usuário deletado com sucesso" });
   }
 }
 
