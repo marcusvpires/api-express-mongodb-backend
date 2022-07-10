@@ -6,11 +6,17 @@ const middlewares = (server) => {
 
 export default middlewares;
 
+const inputTrim = (object) => {
+  object.email = object.email.trim();
+  object.password = object.password.trim();
+  if (object.name) object.name = object.name.trim();
+  return object;
+}
+
 export const inputFormat = (req, res, next) => {
   try {
-    req.body.email = req.body.email.trim();
-    req.body.password = req.body.password.trim();
-    if (req.body.name) req.body.name = req.body.name.trim();
+    req.body = inputTrim(req.body)
+    if (req.body.update) req.body.update = inputTrim(req.body)
     return next();
   } catch (error) {
     return res.json({ ok: false, error: error.message, message: "Dados inválidos" });

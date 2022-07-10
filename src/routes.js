@@ -6,7 +6,9 @@ import { inputFormat } from './middlewares';
 const routes = new Router();
 
 routes.post('/user/store', inputFormat, SessionController.store);
-routes.post('/user/show', inputFormat, SessionController.show);
+routes.get('/user/show', inputFormat, SessionController.show);
+routes.put('/user/update/:id', inputFormat, SessionController.update);
+routes.get('/user/index', SessionController.index);
 
 routes.get('/', (req, res) => {
   return res.json({
