@@ -12,12 +12,17 @@ import User from '../models/User';
 class SessionController {
   async store(req, res) {
     const { email } = req.body;
+    const { filename } = req.file;
     let user = await User.findOne({ email });
     if (!user) {
-      user = await User.create(req.body);
-      return res.json({ ok: true, user, message: 'Usuário criado com sucesso' });
+      user = await User.create(user);
+      user.photo = filename;
+      return res.json({ ok: true, user, file: req.file, message: 'Usuário criado com sucesso' });
     } else {
-      return res.json({ ok: false, message: 'Esse usuário já existe' });
+      // return res.json({ ok: false, message: 'Esse usuário já existe' });
+      const response = await User.updateOne({ _id: user._id }, user);
+      user.photo = filename;
+      return res.json({ ok: true, user, file: req.file, response, message: 'Usuário atualizado' });
     }
   }
 
@@ -45,11 +50,11 @@ class SessionController {
 
   async destroy(req, res) {
     const { id } = req.body;
-    if (!id) { 
-      return res.json({ ok: false, message: "O ID é indefinido" });
+    if (!id) {
+      return res.json({ ok: false, message: 'O ID é indefinido' });
     }
     const response = await User.findByIdAndDelete({ _id: id });
-    return res.json({ ok: true, response, message: "Usuário deletado com sucesso" });
+    return res.json({ ok: true, response, message: 'Usuário deletado com sucesso' });
   }
 }
 

@@ -1,11 +1,14 @@
 import { Router } from 'express';
+import multer from 'multer';
 
 import SessionController from './controllers/SessionController';
 import { inputFormat } from './middlewares';
+import uploadConfig from './config/upload';
 
+const upload = multer(uploadConfig);
 const routes = new Router();
 
-routes.post('/user', inputFormat, SessionController.store);
+routes.post('/user', upload.single('photo'), inputFormat, SessionController.store);
 routes.get('/user', inputFormat, SessionController.show);
 routes.put('/user/:id', inputFormat, SessionController.update);
 routes.get('/user/index', SessionController.index);
